@@ -5,7 +5,17 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-
+  const handleButtonClick = async () => {
+    try {
+      // Replace 'your_backend_url' with the actual URL of your backend endpoint
+      const response = await axios.post('https://someones.vercel.app/api/hello');
+      console.log('Form submitted:', response.data);
+      setCount(count + 1); // Increment the count state
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Username or password is incorrect.');
+    }
+  };
   return (
     <>
       <div>
@@ -18,9 +28,9 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      <button onClick={handleButtonClick}>
+        Count is {count}
+      </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
