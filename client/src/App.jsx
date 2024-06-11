@@ -3,42 +3,22 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import axios from 'axios';
-import base64 from 'base-64';
 function App() {
   const [count, setCount] = useState(0)
   const handleButtonClick = async () => {
     try {
-      const headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      headers.append('Accept', 'application/json');
-      // headers.append('Authorization', 'Basic ' + base64.encode(username + ':' + password));
-      headers.append('Origin', 'http://localhost:3000');
-
       const payload = {
-        username: 'rose' // Replace with actual username
-      };
+        "username":"rose"
+    };
 
-      const stringifiedPayload = JSON.stringify(payload);
+    const stringifiedPayload = JSON.stringify(payload);
 
-      const response = await fetch('https://someones.vercel.app/api/hello', {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
+    const response = await axios.get('https://someones.vercel.app/api/hello', {
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Origin':'https://someones-oaxq.vercel.app'
-          // 'Authorization': 'Basic ' + base64.encode('username:password')
+            'Content-Type': 'text/plain'  // Set the Content-Type header to text/plain
         }
-        // body: stringifiedPayload
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const jsonResponse = await response.json();
-      console.log('Form submitted:', jsonResponse);
+    });
+      console.log('Form submitted:', response.data);
       setCount(count + 1); // Increment the count state
     } catch (error) {
       console.error('Error submitting form:', error);
