@@ -12,12 +12,8 @@ function App() {
     };
 
     const stringifiedPayload = JSON.stringify(payload);
-
-    const response = await axios.get('https://cors-anywhere.herokuapp.com/https://someones.vercel.app/api/hello', {
-        headers: {
-            'Content-Type': 'text/plain'  // Set the Content-Type header to text/plain
-        }
-    });
+    // axios.get(`https://cors-anywhere.herokuapp.com/https://someones.vercel.app/api/hello`)
+    const response = await axios.get(`https://cors-anywhere.herokuapp.com/https://someones.vercel.app/api/hello`)
       console.log('Form submitted:', response.data);
       setCount(count + 1); // Increment the count state
     } catch (error) {
