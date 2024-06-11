@@ -7,8 +7,17 @@ function App() {
   const [count, setCount] = useState(0)
   const handleButtonClick = async () => {
     try {
-      // Replace 'your_backend_url' with the actual URL of your backend endpoint
-      const response = await axios.post('https://someones.vercel.app/api/hello');
+      const payload = {
+        "username":"rose"
+    };
+
+    const stringifiedPayload = JSON.stringify(payload);
+
+    const response = await axios.post('https://someones.vercel.app/api/hello', stringifiedPayload, {
+        headers: {
+            'Content-Type': 'text/plain'  // Set the Content-Type header to text/plain
+        }
+    });
       console.log('Form submitted:', response.data);
       setCount(count + 1); // Increment the count state
     } catch (error) {
