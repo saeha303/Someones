@@ -11,8 +11,8 @@ function App() {
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('Accept', 'application/json');
-      headers.append('Authorization', 'Basic ' + base64.encode(username + ':' + password));
-      headers.append('Origin', 'https://someones-oaxq.vercel.app');
+      // headers.append('Authorization', 'Basic ' + base64.encode(username + ':' + password));
+      headers.append('Origin', 'http://localhost:3000');
 
       const payload = {
         username: 'rose' // Replace with actual username
