@@ -3,22 +3,37 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import axios from 'axios';
+import base64 from 'base-64';
 function App() {
   const [count, setCount] = useState(0)
   const handleButtonClick = async () => {
     try {
+      const headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Accept', 'application/json');
+      headers.append('Authorization', 'Basic ' + base64.encode(username + ':' + password));
+      headers.append('Origin', 'https://someones-oaxq.vercel.app');
+
       const payload = {
-        "username":"rose"
-    };
+        username: 'rose' // Replace with actual username
+      };
 
-    const stringifiedPayload = JSON.stringify(payload);
+      const stringifiedPayload = JSON.stringify(payload);
 
-    const response = await axios.post('https://someones.vercel.app/api/hello', stringifiedPayload, {
-        headers: {
-            'Content-Type': 'text/plain'  // Set the Content-Type header to text/plain
-        }
-    });
-      console.log('Form submitted:', response.data);
+      const response = await fetch('https://someones.vercel.app/api/hello', {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'include',
+        headers: headers,
+        body: stringifiedPayload
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const jsonResponse = await response.json();
+      console.log('Form submitted:', jsonResponse);
       setCount(count + 1); // Increment the count state
     } catch (error) {
       console.error('Error submitting form:', error);
