@@ -21,11 +21,11 @@ function App() {
       const stringifiedPayload = JSON.stringify(payload);
 
       const response = await fetch('https://someones.vercel.app/api/hello', {
-        method: 'POST',
+        method: 'GET',
         mode: 'cors',
         credentials: 'include',
         headers: headers,
-        body: stringifiedPayload
+        // body: stringifiedPayload
       });
 
       if (!response.ok) {
