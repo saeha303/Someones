@@ -24,7 +24,12 @@ function App() {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
-        headers: headers,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Origin':'https://someones-oaxq.vercel.app'
+          // 'Authorization': 'Basic ' + base64.encode('username:password')
+        }
         // body: stringifiedPayload
       });
 
